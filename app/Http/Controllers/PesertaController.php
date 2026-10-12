@@ -32,10 +32,14 @@ class PesertaController extends Controller
     {
         $request->validate([
             'skema_id' => 'required|exists:skemas,id',
-            'nm_peserta' => 'required',
+            'nm_peserta' => ['required','string','regex:/^[a-zA-Z\s]+$/'],
             'jk' => 'required|in:L,P',
-            'alamat' => 'required',
+            'alamat' => 'required|numeric|digits_between:1,12',
             'no_hp' => 'required',
+        ],[
+             'nm_peserta.regex' => "Nama skema hanya boleh berisi huruf dan spasi, tidak boleh ada angka!",
+             'no_hp_digits_between' => "Nomor HP maksimal terdiri dari 12 angka!",
+             'no_hp_numeric' => 'Nomor HP harus berupa angka!',
         ]);
 
         Peserta::create($request->all());

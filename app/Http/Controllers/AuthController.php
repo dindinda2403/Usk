@@ -29,11 +29,35 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
+    public function showRegister()
+    {
+        return view('auth.Register');
+    }
+
+    public function register(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = \App\Models\User::create([
+            'name' => 'Admin Baru', // Berikan nilai default karena input namanya dihapus
+            'email' => $validated['email'],
+            'password' => \Illuminate\Support\Facades\Hash::make($validated['password']),
+        ]);
+
+        Auth::login($user);
+
+        return redirect('/dashboard')->with('success', 'Registrasi berhasil!');
+    }
+
+
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/');
     }
 }

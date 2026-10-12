@@ -27,6 +27,7 @@
                 <input type="password" name="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary w-100">Login</button>
+            <a href="{{ url('/') }}" class="btn btn-outline-secondary w-100 mt-2">Kembali</a>
         </form>
     </div>
 </body>

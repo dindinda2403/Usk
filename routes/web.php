@@ -9,6 +9,9 @@ use App\Http\Controllers\PesertaController;
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+    Route::get('/Register', [AuthController::class, 'showRegister'])->name('Register');
+    Route::post('/Register', [AuthController::class, 'Register'])->name('Register.post');
 });
 
 // Authenticated Routes (Harus login dulu)
@@ -26,5 +29,5 @@ Route::middleware('auth')->group(function () {
 
 // Redirect halaman utama ke login
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('welcome');
 });
