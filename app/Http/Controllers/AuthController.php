@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peserta;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -36,22 +39,34 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        // 1. Validasi input nama, email (harus unik), dan password
         $validated = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
         ]);
 
-        $user = \App\Models\User::create([
-            'name' => 'Admin Baru', // Berikan nilai default karena input namanya dihapus
-            'email' => $validated['email'],
-            'password' => \Illuminate\Support\Facades\Hash::make($validated['password']),
+        // 2. Buat akun User dengan role 'peserta'
+        $user = User::create([
+            'name'     => $validated['name'],
+            'email'    => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role'     => 'peserta',
         ]);
 
-        Auth::login($user);
+        // 3. Otomatis buatkan baris data profil di tabel pesertas
+        Peserta::create([
+            'user_id'    => $user->id,
+            'skema_id'   => 1, // Default ID skema awal
+            'nm_peserta' => $validated['name'],
+            'jk'         => 'L',  // Default jenis kelamin
+            'no_hp'      => '-',  // Default No HP
+            'alamat'     => '-',  // Default Alamat
+        ]);
 
-        return redirect('/dashboard')->with('success', 'Registrasi berhasil!');
+        // 4. DIARAHKAN KE HALAMAN LOGIN (Bukan otomatis login)
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login menggunakan email dan password Anda.');
     }
-
 
     public function logout(Request $request)
     {
