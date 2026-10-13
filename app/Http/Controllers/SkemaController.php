@@ -48,11 +48,9 @@ class SkemaController extends Controller
     {
         $validated = $request->validate([
             'kd_skema' => 'required|unique:skemas,kd_skema,' . $skema->id,
-            'nm_skema' => ['required','string','regex:/^[a-zA-Z\s]+$/'],
+            'nm_skema' => 'Required',
             'jenis' => 'required',
             'jumlah_unit' => 'required|numeric',
-        ],[
-            'nm_skema.regex' => "Nama skema hanya boleh berisi huruf dan spasi, tidak boleh ada angka!",
         ]);
 
         // Mengupdate menggunakan data yang tervalidasi

@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 02, 2026 at 06:06 AM
+-- Generation Time: Oct 13, 2026 at 12:22 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.4.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_peserta_sertifikasi`
+-- Database: `db_pesertas_sertifikasi`
 --
 
 -- --------------------------------------------------------
@@ -148,15 +148,6 @@ CREATE TABLE `pesertas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `pesertas`
---
-
-INSERT INTO `pesertas` (`id`, `skema_id`, `nm_peserta`, `jk`, `alamat`, `no_hp`, `created_at`, `updated_at`) VALUES
-(2, 5, 'Azzahra', 'P', 'Jl.Assalamualaikum', '08287452823', '2026-10-01 03:19:40', '2026-10-01 03:19:40'),
-(3, 6, 'Aditya', 'L', 'Jl.Waalaikumsalam', '0823647245', '2026-10-01 03:20:11', '2026-10-01 03:20:11'),
-(4, 7, 'FAY', 'P', 'Jl.Alhamdulillah', '08137366746', '2026-10-01 07:13:47', '2026-10-01 07:13:47');
-
 -- --------------------------------------------------------
 
 --
@@ -177,7 +168,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('FpsAWPq0POVgLqnqg7lRZ110t8xV3fq8p2SsfLiP', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.139.1 Chrome/150.0.7871.250 Electron/43.6.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVFd6bmY0RGNuUFYwemJYOHN1aUdoVEtoRlFSY3dkcDNOZmZ0U01MaSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZXNlcnRhcyI7czo1OiJyb3V0ZSI7czoxNDoicGVzZXJ0YXMuaW5kZXgiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjY0OiI1YjhmZTZiNjI5MzMxYTU0ZDUyNzdlZWI5YTI4NTJhZTAwYjI2NzBjNGVhOWIwZWJiOTE5ZGNiNWViYjEzYzdiIjt9', 1790918638);
+('5g4gPdxQ7grkPSzkm3C0QR1sbkMIQIECoQJw1mNR', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoicnJpUjdjdm9iSDBsYnRUaXIxY2VsVU11dG41V1I1TTVTTHpqd0x4eSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9za2VtYXMvY3JlYXRlIjtzOjU6InJvdXRlIjtzOjExOiJza2VtYXMuc2hvdyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjQ6IjIzZWZiN2MyZDlhOWZhMWIzODI5NTdiNTNmZTA1YjRmODE4OGIxNDQ3YTM3YjU0NmNmZTU3NzRlNjE2NTQ5MTgiO30=', 1791812793),
+('uJL0b8xJWfJik5dX1EvgYzLS8AIIPTASd083nP3J', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidjV5Y01Ic0pWZWd4YTkySTcwYldhOHhOcG1UaWNCOXNvdWxxYktGTyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NrZW1hcy9jcmVhdGUiO31zOjk6Il9wcmV2aW91cyI7YToyOntzOjM6InVybCI7czozNToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NrZW1hcy9jcmVhdGUiO3M6NToicm91dGUiO3M6MTE6InNrZW1hcy5zaG93Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1791850658);
 
 -- --------------------------------------------------------
 
@@ -195,15 +187,6 @@ CREATE TABLE `skemas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `skemas`
---
-
-INSERT INTO `skemas` (`id`, `kd_skema`, `nm_skema`, `jenis`, `jumlah_unit`, `created_at`, `updated_at`) VALUES
-(5, '01', 'Junior Web Developer', 'KKNI', 1, '2026-10-01 03:18:18', '2026-10-01 03:18:18'),
-(6, '02', 'Junior Aplication Developer', 'Okupasi', 1, '2026-10-01 03:18:39', '2026-10-01 03:20:46'),
-(7, '03', 'Junior Web Developer', 'Klaster', 1, '2026-10-01 03:18:58', '2026-10-01 03:18:58');
-
 -- --------------------------------------------------------
 
 --
@@ -211,6 +194,7 @@ INSERT INTO `skemas` (`id`, `kd_skema`, `nm_skema`, `jenis`, `jumlah_unit`, `cre
 --
 
 CREATE TABLE `users` (
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'peserta',
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -225,8 +209,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator LSP', 'admin@gmail.com', NULL, '$2y$12$wqOTI9Xu465bmGuZ1S/F5eYU/0rLVkWlHOIqFRdqDoTvP4VcWPvVq', NULL, '2026-09-30 07:42:55', '2026-09-30 07:42:55');
+INSERT INTO `users` (`role`, `id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+('admin', 1, 'Administrator LSP', 'admin@gmail.com', NULL, '$2y$12$RmWxxcCxzW57OhSiCQBie.MPD1ZPq3NO.TNGjVuzaUfgPZFvIhonG', NULL, '2026-10-12 06:34:52', '2026-10-12 06:34:52'),
+('peserta', 2, 'Peserta Sertifikasi', 'peserta@gmail.com', NULL, '$2y$12$hvepPesX/EZLBoHRyvuQU./BpKWgHKFFB1BqXWX6FruYcQCPVGLQi', NULL, '2026-10-12 06:34:53', '2026-10-12 06:34:53');
 
 --
 -- Indexes for dumped tables
@@ -333,19 +318,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pesertas`
 --
 ALTER TABLE `pesertas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `skemas`
 --
 ALTER TABLE `skemas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

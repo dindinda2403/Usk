@@ -17,6 +17,14 @@ class UserSeeder extends Seeder
             'name'=>'Administrator LSP',
             'email'=>'admin@gmail.com',
             'password'=>Hash::make('12345'),
+            'role' => 'admin',
+        ]);
+
+        user::create([
+            'name' => 'Peserta Sertifikasi',
+            'email' => 'peserta@gmail.com',
+            'password' => Hash::make('12345'),
+            'role' => 'peserta',
         ]);
     }
 }

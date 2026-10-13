@@ -20,11 +20,32 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    // Mendaftarkan Route CRUD Skema dan Peserta
-    Route::resource('skemas', SkemaController::class);
-    Route::resource('pesertas', PesertaController::class);
-
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // 1. Route yang BISA DIBACHA/DILIHAT OLEH SEMUA USER (Admin & Peserta)
+    Route::get('/skemas', [SkemaController::class, 'index'])->name('skemas.index');
+    Route::get('/skemas/{skema}', [SkemaController::class, 'show'])->name('skemas.show');
+    
+    Route::get('/pesertas', [PesertaController::class, 'index'])->name('pesertas.index');
+    Route::get('/pesertas/{peserta}', [PesertaController::class, 'show'])->name('pesertas.show');
+
+    // 2. Route KHUSUS ADMIN (Create, Edit, Update, Delete)
+    // Supaya peserta tidak bisa akses lewat ketik URL manual
+    Route::middleware('can:admin')->group(function () {
+        // CRUD Skema (Aksi Tambah, Edit, Hapus)
+        Route::get('/skemas/create', [SkemaController::class, 'create'])->name('skemas.create');
+        Route::post('/skemas', [SkemaController::class, 'store'])->name('skemas.store');
+        Route::get('/skemas/{skema}/edit', [SkemaController::class, 'edit'])->name('skemas.edit');
+        Route::put('/skemas/{skema}', [SkemaController::class, 'update'])->name('skemas.update');
+        Route::delete('/skemas/{skema}', [SkemaController::class, 'destroy'])->name('skemas.destroy');
+
+        // CRUD Peserta (Aksi Tambah, Edit, Hapus)
+        Route::get('/pesertas/create', [PesertaController::class, 'create'])->name('pesertas.create');
+        Route::post('/pesertas', [PesertaController::class, 'store'])->name('pesertas.store');
+        Route::get('/pesertas/{peserta}/edit', [PesertaController::class, 'edit'])->name('pesertas.edit');
+        Route::put('/pesertas/{peserta}', [PesertaController::class, 'update'])->name('pesertas.update');
+        Route::delete('/pesertas/{peserta}', [PesertaController::class, 'destroy'])->name('pesertas.destroy');
+    });
 });
 
 // Redirect halaman utama ke login
