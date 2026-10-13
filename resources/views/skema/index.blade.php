@@ -12,7 +12,11 @@
             <h3>Data Skema Sertifikasi</h3>
             <div>
                 <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm">Kembali ke Dashboard</a>
-                <a href="{{ route('skemas.create') }}" class="btn btn-primary btn-sm">+ Tambah Skema</a>
+
+                {{-- Tombol Tambah Skema HANYA untuk Admin --}}
+                @if(auth()->user()->role === 'admin')
+                    <a href="{{ route('skemas.create') }}" class="btn btn-primary btn-sm">+ Tambah Skema</a>
+                @endif
             </div>
         </div>
 
@@ -20,7 +24,7 @@
             <div class="alert alert-success py-2">{{ session('success') }}</div>
         @endif
 
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
                     <th>No</th>
@@ -40,13 +44,18 @@
                         <td>{{ $s->jenis }}</td>
                         <td>{{ $s->jumlah_unit }}</td>
                         <td>
-                            <a href="{{ route('skemas.show', $s->id) }}" class="btn btn-sm">Detail</a>
-                            <a href="{{ route('skemas.edit', $s->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('skemas.destroy', $s->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                            </form>
+                            {{-- Tombol Detail bisa dilihat Admin & Peserta --}}
+                            <a href="{{ route('skemas.show', $s->id) }}" class="btn btn-info btn-sm text-white">Detail</a>
+
+                            {{-- Tombol Edit & Hapus HANYA untuk Admin --}}
+                            @if(auth()->user()->role === 'admin')
+                                <a href="{{ route('skemas.edit', $s->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('skemas.destroy', $s->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @empty
