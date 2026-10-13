@@ -44,20 +44,20 @@ class SkemaController extends Controller
         return view('skema.show', compact('skema'));
     }
 
-    public function update(Request $request, Skema $skema)
-    {
-        $validated = $request->validate([
-            'kd_skema' => 'required|unique:skemas,kd_skema,' . $skema->id,
-            'nm_skema' => 'Required',
-            'jenis' => 'required',
-            'jumlah_unit' => 'required|numeric',
-        ]);
+   public function update(Request $request, Skema $skema)
+{
+    $validated = $request->validate([
+        'kd_skema' => 'required|unique:skemas,kd_skema,' . $skema->id,
+        'nm_skema' => 'required',
+        'jenis' => 'required',
+        'jumlah_unit' => 'required|numeric',
+    ]);
 
-        // Mengupdate menggunakan data yang tervalidasi
-        $skema::create($validated);
+    // Ubah dari create menjadi update pada objek $skema
+    $skema->update($validated);
 
-        return redirect()->route('skemas.index')->with('success', 'Skema berhasil diperbarui!');
-    }
+    return redirect()->route('skemas.index')->with('success', 'Skema berhasil diperbarui!');
+}
 
     public function destroy(Skema $skema)
     {

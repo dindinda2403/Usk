@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Hash;
 class PesertaController extends Controller
 {
     public function index()
-    {
+    { 
         if (Auth::user()->role === 'admin') {
-            $pesertas = Peserta::with(['user', 'skema'])->get();
-        } else {
-            $pesertas = Peserta::with(['user', 'skema'])->where('user_id', Auth::id())->get();
-        }
+    $pesertas = Peserta::with(['user', 'skema'])->get(); // Admin bisa lihat semua
+} else {
+    $pesertas = Peserta::with(['user', 'skema'])->where('user_id', Auth::id())->get(); // Peserta hanya bisa lihat datanya sendiri
+}
 
         return view('pesertas.index', compact('pesertas'));
     }

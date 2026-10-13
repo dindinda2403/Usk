@@ -16,17 +16,22 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <p class="text-muted mb-0">
+       <div class="row align-items-center mb-3">
+            <div class="col-md-6 mb-2 mb-md-0">
+                <!-- Form Pencarian -->
+                <form action="{{ route('pesertas.index') }}" method="GET" class="d-flex gap-2">
+                    <input type="text" name="search" class="form-control" placeholder="Cari nama peserta..." value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                    @if(request('search'))
+                        <a href="{{ route('pesertas.index') }}" class="btn btn-secondary">Reset</a>
+                    @endif
+                </form>
+            </div>
+            <div class="col-md-6 text-md-end">
                 @if(auth()->user()->role === 'admin')
-                    Menampilkan seluruh data peserta sertifikasi.
-                @else
-                    Data profil dan pilihan skema Anda.
+                    <a href="{{ route('pesertas.create') }}" class="btn btn-success">+ Tambah Peserta</a>
                 @endif
-            </p>
-            @if(auth()->user()->role === 'admin')
-                <a href="{{ route('pesertas.create') }}" class="btn btn-success">+ Tambah Peserta</a>
-            @endif
+            </div>
         </div>
 
         <table class="table table-bordered table-striped">
