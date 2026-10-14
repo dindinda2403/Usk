@@ -25,8 +25,8 @@
             <thead class="table-dark">
                 <tr>
                     <th>No</th>
-                    <th>Nama Lengkap</th>
-                    <th>Email / Username</th>
+                    <th>Nama</th>
+                    <th>Email</th>
                     <th>Role</th>
                     <th>Aksi</th>
                 </tr>

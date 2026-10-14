@@ -71,7 +71,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'role' => 'required|in:admin,peserta',
         ]);
@@ -84,6 +84,7 @@ class UserController extends Controller
 
         // Jika password diisi, update password baru
         if ($request->filled('password')) {
+            $request->validate(['password' => 'min:5']);
             $data['password'] = Hash::make($request->password);
         }
 

@@ -31,12 +31,12 @@
                         <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email / Username Login</label>
+                        <label class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Minimal 6 karakter" required>
+                        <input type="password" name="password" class="form-control" placeholder="Minimal 5 karakter" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Role Akses</label>

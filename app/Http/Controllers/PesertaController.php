@@ -11,13 +11,27 @@ use Illuminate\Support\Facades\Hash;
 
 class PesertaController extends Controller
 {
-    public function index()
-    { 
+    public function index(Request $request)
+    {
+        $search = $request->input('search'); // Menangkap kata kunci pencarian
+
         if (Auth::user()->role === 'admin') {
-    $pesertas = Peserta::with(['user', 'skema'])->get(); // Admin bisa lihat semua
-} else {
-    $pesertas = Peserta::with(['user', 'skema'])->where('user_id', Auth::id())->get(); // Peserta hanya bisa lihat datanya sendiri
-}
+            $query = Peserta::with(['user', 'skema']);
+
+            if ($search) {
+                $query->where('nm_peserta', 'like', '%' . $search . '%');
+            }
+
+            $pesertas = $query->get();
+        } else {
+            $query = Peserta::with(['user', 'skema'])->where('user_id', Auth::id());
+
+            if ($search) {
+                $query->where('nm_peserta', 'like', '%' . $search . '%');
+            }
+
+            $pesertas = $query->get();
+        }
 
         return view('pesertas.index', compact('pesertas'));
     }
@@ -25,7 +39,6 @@ class PesertaController extends Controller
     public function create()
     {
         $skemas = Skema::all();
-        // Variabel $users tidak diperlukan lagi karena akun dibuat otomatis
         return view('pesertas.create', compact('skemas'));
     }
 
@@ -33,8 +46,8 @@ class PesertaController extends Controller
     {
         $request->validate([
             'nm_peserta' => 'required',
-            'email'      => 'required|email', // Validasi email unik untuk login
-            'password'   => 'required',                    // Password login peserta
+            'email'      => 'required|email',
+            'password'   => 'required',
             'skema_id'   => 'required|exists:skemas,id',
             'jk'         => 'required|in:L,P',
             'no_hp'      => 'required|digits:12',

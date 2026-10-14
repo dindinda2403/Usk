@@ -22,7 +22,7 @@
 
         <form action="{{ route('Register.post') }}" method="POST">
             @csrf
-            
+
             {{-- Input Nama Lengkap --}}
             <div class="mb-3">
                 <label class="form-label">Nama Lengkap</label>

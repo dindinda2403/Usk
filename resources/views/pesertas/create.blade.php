@@ -38,7 +38,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Password Login</label>
-                        <input type="password" name="password" class="form-control" placeholder="Minimal 6 karakter" required>
+                        <input type="password" name="password" class="form-control" placeholder="Minimal 5 karakter" required>
                     </div>
 
                     <div class="mb-3">

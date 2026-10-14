@@ -41,9 +41,9 @@ class AuthController extends Controller
     {
         // 1. Validasi input nama, email (harus unik), dan password
         $validated = $request->validate([
-            'name'     => 'required|string|max:255',
+            'name'     => 'required|string',
             'email'    => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:5',
         ]);
 
         // 2. Buat akun User dengan role 'peserta'
